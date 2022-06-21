@@ -1,6 +1,7 @@
 import 'package:dynamic_textformfield/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_textformfield/show_dialog.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -31,28 +32,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 class _View3 extends StatefulWidget {
   @override
   _View3State createState() => _View3State();
 }
 
 class _View3State extends State<_View3> {
-  List<TextEditingController> _nameControllers = [];
-  List<TextField> _nameFields = [];
-  List<TextEditingController> _telControllers = [];
-  List<TextField> _telFields = [];
-  List<TextEditingController> _addressControllers = [];
-  List<TextField> _addressFields = [];
+  final List<TextEditingController> _nameControllers = [];
+  final List<TextField> _nameFields = [];
+  final List<TextEditingController> _telControllers = [];
+  final List<TextField> _telFields = [];
+  final List<TextEditingController> _addressControllers = [];
+  final List<TextField> _addressFields = [];
 
   @override
   void dispose() {
@@ -74,7 +65,7 @@ class _View3State extends State<_View3> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Dynamic Group Text Field"),
+            title: const Text("Dynamic Group Text Field"),
           ),
           body: Column(
             children: [
@@ -88,7 +79,7 @@ class _View3State extends State<_View3> {
 
   Widget _addTile() {
     return ListTile(
-      title: Icon(Icons.add),
+      title: const Icon(Icons.add),
       onTap: () {
         final name = TextEditingController();
         final tel = TextEditingController();
@@ -114,7 +105,7 @@ class _View3State extends State<_View3> {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         labelText: hint,
       ),
     );
@@ -124,20 +115,20 @@ class _View3State extends State<_View3> {
     final children = [
       for (var i = 0; i < _nameControllers.length; i++)
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: i.toString(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
             child: Column(
               children: [
                 _nameFields[i],
                 _telFields[i],
                 _addressFields[i],
               ],
-            ),
-            decoration: InputDecoration(
-              labelText: i.toString(),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
             ),
           ),
         )
@@ -154,7 +145,7 @@ class _View3State extends State<_View3> {
     final textField = TextField(
       controller: _okController,
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         border: OutlineInputBorder(),
       ),
     );
@@ -164,29 +155,31 @@ class _View3State extends State<_View3> {
         String text = _nameControllers
             .where((element) => element.text != "")
             .fold("", (acc, element) => acc += "${element.text}\n");
-        text = text + _telControllers
-            .where((element) => element.text != "")
-            .fold("", (acc, element) => acc += "${element.text}\n");
-        text = text + _addressControllers
-            .where((element) => element.text != "")
-            .fold("", (acc, element) => acc += "${element.text}\n");
-      /*  final index = int.parse(_okController.text);
+        text = text +
+            _telControllers
+                .where((element) => element.text != "")
+                .fold("", (acc, element) => acc += "${element.text}\n");
+        text = text +
+            _addressControllers
+                .where((element) => element.text != "")
+                .fold("", (acc, element) => acc += "${element.text}\n");
+        /*  final index = int.parse(_okController.text);
         String text = "name: ${_nameControllers[index].text}\n" +
             "tel: ${_telControllers[index].text}\n" +
             "address: ${_addressControllers[index].text}";*/
         await showMessage(context, text, "Result");
       },
-      child: Text("OK"),
+      child: const Text("OK"),
     );
 
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Container(
-          child: textField,
+        SizedBox(
           width: 100,
           height: 50,
+          child: textField,
         ),
         button,
       ],
@@ -194,30 +187,14 @@ class _View3State extends State<_View3> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class _View1 extends StatefulWidget {
   @override
   _View1State createState() => _View1State();
 }
 
 class _View1State extends State<_View1> {
-  List<TextEditingController> _controllers = [];
-  List<TextField> _fields = [];
+  final List<TextEditingController> _controllers = [];
+  final List<TextField> _fields = [];
 
   @override
   void dispose() {
@@ -232,7 +209,7 @@ class _View1State extends State<_View1> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Dynamic Text Field"),
+            title: const Text("Dynamic Text Field"),
           ),
           body: Column(
             children: [
@@ -246,13 +223,13 @@ class _View1State extends State<_View1> {
 
   Widget _addTile() {
     return ListTile(
-      title: Icon(Icons.add),
+      title: const Icon(Icons.add),
       onTap: () {
         final controller = TextEditingController();
         final field = TextField(
           controller: controller,
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             labelText: "name${_controllers.length + 1}",
           ),
         );
@@ -270,7 +247,7 @@ class _View1State extends State<_View1> {
       itemCount: _fields.length,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: _fields[index],
         );
       },
@@ -291,7 +268,7 @@ class _View1State extends State<_View1> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         );
@@ -301,7 +278,7 @@ class _View1State extends State<_View1> {
         );
         setState(() {});
       },
-      child: Text("OK"),
+      child: const Text("OK"),
     );
   }
 }
